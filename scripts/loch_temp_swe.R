@@ -1,6 +1,6 @@
 source("scripts/libraries.R")
 
-# the loch data - outlet temp record and bear lake snotel 
+# loch data - outlet temp record and bear lake snotel 
 
 # read in loch data 
   # temp for all sites - will subset for loch outlet below but this is all here 
