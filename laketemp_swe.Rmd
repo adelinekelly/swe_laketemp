@@ -1,0 +1,137 @@
+---
+title: "SWE vs. Lake Temperature"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+
+``` {r, include = FALSE}
+
+source("scripts/loch_temp_swe.R")
+source("scripts/gl4_temp_swe.R")
+
+```
+
+
+## Is there a relationship between SWE (Snow-Water Equivalent) and summer lake temperature in mountain lakes in the Rockies?
+
+### Examining long-term data for SWE and summer lake temperature in 3 mountain lakes in the Rockies: The Loch, Sky Pond, and Green Lake 4. 
+
+### The Loch
+SWE data for the Loch pulled from the Bear Lake SNOTEL site: https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=322
+
+The outlet temperature record is more consistent than the lake temperature record, hence the comparison of outlet temperature to SWE rather than lake temperature. Here we're comparing SWE to Loch Outlet summer temperature, with summer being defined as June through August. 
+
+#### SWE vs. Average Loch Outlet Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = loch_temp_swe_avg, aes(x = swe, y = mean_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+#### SWE vs. Max Loch Outlet Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = loch_temp_swe_max, aes(x = swe, y = max_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+### Sky Pond
+SWE data for Sky Pond pulled from the Bear Lake SNOTEL site: https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=322
+
+The lake temperature record for Sky Pond is fairly consistent; here we're comparing SWE to summer lake surface temperature with summer being defined as June through August.
+
+#### SWE vs. Average Sky Pond Surface Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = skysurface_temp_swe_avg, aes(x = swe, y = mean_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+#### SWE vs. Max Sky Pond Surface Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = skysurface_temp_swe_max, aes(x = swe, y = max_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+### Green Lake 4
+SWE data for Green Lake 4 pulled from Niwot Ridge snow survey data: https://portal.edirepository.org/nis/mapbrowse?packageid=knb-lter-nwt.96.19
+
+Here we're comparing SWE to summer lake surface temperature for GL4. Temperature data for GL4 are only collected during the summer, within our previously defined summer period of June through August. 
+
+#### SWE vs. Average GL4 Surface Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = gl4_temp_swe_avg, aes(x = mean_swe, y = mean_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+#### SWE vs. Max GL4 Surface Summer Temperature
+```{r, fig.width=12, fig.height=9, echo = FALSE}
+
+library(ggplot2)
+library(ggpubr)
+
+ggplot2::ggplot(data = gl4_temp_swe_max, aes(x = mean_swe, y = max_temp)) +
+  geom_point() +
+  geom_smooth(method = "lm", colour = "deepskyblue") +
+  #geom_smooth(method = "gam", colour = "purple") +
+          stat_cor(aes(label = paste(after_stat(rr.label), ..p.label.., sep = "~`,`~")),
+                       p.accuracy = 0.001, r.accuracy = 0.01, label.x.npc = 0.4, color = "deepskyblue")
+
+```
+
+
+
+
+
+
+
